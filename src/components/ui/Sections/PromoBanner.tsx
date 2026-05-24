@@ -1,4 +1,7 @@
+"use client";
+
 import { ArrowRight, Clock } from "lucide-react";
+import { useState, useEffect } from "react";
 
 interface PromoBannerProps {
   title: string;
@@ -10,7 +13,18 @@ interface PromoBannerProps {
   textColor?: string;
   badge?: string;
   showTimer?: boolean;
+  autoRotate?: boolean;
+  rotationInterval?: number;
 }
+
+// Background presets for auto-rotation
+const backgroundPresets = [
+  { from: "#6366f1", to: "#a855f7" }, // Purple
+  { from: "#f43f5e", to: "#fb923c" }, // Orange-Red
+  { from: "#0ea5e9", to: "#06b6d4" }, // Blue-Cyan
+  { from: "#10b981", to: "#14b8a6" }, // Green-Teal
+  { from: "#ec4899", to: "#f43f5e" }, // Pink-Red
+];
 
 const PromoBanner = ({
   title,
@@ -20,14 +34,37 @@ const PromoBanner = ({
   gradientTo = "#a855f7",
   badge,
   showTimer = false,
+  autoRotate = true,
+  rotationInterval = 5000,
 }: PromoBannerProps) => {
+  const [currentBgIndex, setCurrentBgIndex] = useState(0);
+  const [currentGradient, setCurrentGradient] = useState({
+    from: gradientFrom,
+    to: gradientTo,
+  });
+
+  useEffect(() => {
+    if (!autoRotate) return;
+
+    const interval = setInterval(() => {
+      setCurrentBgIndex((prev) => (prev + 1) % backgroundPresets.length);
+    }, rotationInterval);
+
+    return () => clearInterval(interval);
+  }, [autoRotate, rotationInterval]);
+
+  useEffect(() => {
+    if (autoRotate) {
+      setCurrentGradient(backgroundPresets[currentBgIndex]);
+    }
+  }, [currentBgIndex, autoRotate]);
   return (
     <section className="py-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
-          className="relative overflow-hidden rounded-3xl px-8 py-10 md:px-14 md:py-14 text-white"
+          className="relative overflow-hidden rounded-3xl px-8 py-10 md:px-14 md:py-14 text-white transition-all duration-1000 ease-in-out"
           style={{
-            background: `linear-gradient(135deg, ${gradientFrom} 0%, ${gradientTo} 100%)`,
+            background: `linear-gradient(135deg, ${currentGradient.from} 0%, ${currentGradient.to} 100%)`,
           }}
         >
           {/* Decorative shapes */}
