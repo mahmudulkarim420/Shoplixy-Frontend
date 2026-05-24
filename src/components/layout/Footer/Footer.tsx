@@ -86,7 +86,7 @@ const Footer = () => {
       <div className="border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-slate-800 text-[14px]">
-            Copyright © 2026 Pokobai - All Rights Reserved.
+            Copyright © 2026 Shoplixy - All Rights Reserved.
           </p>
 
           {/* Social Icons */}

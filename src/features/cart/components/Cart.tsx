@@ -140,9 +140,11 @@ const CartPage = () => {
             </div>
 
             {/* Buy Now Button */}
-            <button className="w-full bg-slate-900 text-white py-4 rounded-2xl font-bold text-[15px] hover:bg-slate-800 transition-all duration-300 shadow-lg shadow-slate-200 active:scale-[0.98]">
-              Buy Now
-            </button>
+            <Link href="/checkout" className="block w-full">
+              <button className="w-full bg-slate-900 text-white py-4 rounded-2xl font-bold text-[15px] hover:bg-slate-800 transition-all duration-300 shadow-lg shadow-slate-200 active:scale-[0.98]">
+                Buy Now
+              </button>
+            </Link>
           </div>
         </div>
       </main>

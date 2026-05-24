@@ -43,7 +43,7 @@ const ProductCard = (product: Product) => {
     // 2. Action onujayi Redirect ba Close kora
     if (actionType === "buy") {
       // Next.js use korle router.push('/cart') dibe
-      window.location.href = "/cart";
+      router.push("/checkout");
     } else {
       // Shudhu cart e click korle modal bondho hobe, redirect hobe na
       setIsModalOpen(false);

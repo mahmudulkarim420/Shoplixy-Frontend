@@ -7,6 +7,8 @@ import { Product } from "@/types/product";
 
 import { useCartStore } from "@/features/cart/store/cartStore";
 
+import { useRouter } from "next/navigation";
+
 interface ProductInfoActionsProps {
   product: Product;
   discountPercentage: number;
@@ -15,10 +17,16 @@ interface ProductInfoActionsProps {
 const ProductInfoActions = ({ product, discountPercentage }: ProductInfoActionsProps) => {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const addItem = useCartStore((state) => state.addItem);
+  const router = useRouter();
 
   const handleAddToCart = () => {
     addItem(product, selectedQuantity);
     alert("Added to cart successfully!");
+  };
+
+  const handleBuyNow = () => {
+    addItem(product, selectedQuantity);
+    router.push("/checkout");
   };
 
   return (
@@ -63,20 +71,28 @@ const ProductInfoActions = ({ product, discountPercentage }: ProductInfoActionsP
       </div>
 
       {/* Action Buttons */}
-      <div className="flex gap-3">
+      <div className="flex flex-col sm:flex-row gap-3">
+        <button
+          onClick={handleBuyNow}
+          className="flex-1 bg-slate-900 text-white py-4 rounded-xl font-bold hover:bg-slate-800 transition-all duration-300 shadow-lg shadow-slate-200 active:scale-[0.98] flex items-center justify-center gap-2"
+        >
+          Buy Now
+        </button>
         <button
           onClick={handleAddToCart}
-          className="flex-1 bg-black text-white py-3.5 rounded-lg font-bold hover:bg-slate-800 transition-colors flex items-center justify-center gap-2"
+          className="flex-1 bg-white border-2 border-slate-900 text-slate-900 py-4 rounded-xl font-bold hover:bg-slate-50 transition-all duration-300 flex items-center justify-center gap-2"
         >
           <ShoppingCart size={20} />
           Add to Cart
         </button>
-        <button className="px-4 py-3.5 border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors">
-          <Heart size={20} className="text-slate-600" />
-        </button>
-        <button className="px-4 py-3.5 border border-slate-300 rounded-lg hover:bg-slate-50 transition-colors">
-          <Share2 size={20} className="text-slate-600" />
-        </button>
+        <div className="flex gap-2">
+          <button className="px-4 py-4 border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors">
+            <Heart size={20} className="text-slate-600" />
+          </button>
+          <button className="px-4 py-4 border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors">
+            <Share2 size={20} className="text-slate-600" />
+          </button>
+        </div>
       </div>
 
       {/* Trust Badges */}

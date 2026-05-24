@@ -1,4 +1,4 @@
-# POKOBAIMART - Modern E-commerce Platform
+# Shoplixy - Modern E-commerce Platform
 
 A modern, responsive e-commerce platform built with Next.js, React, TypeScript, and Tailwind CSS. Features a gaming/tech-focused design with a complete shopping experience.
 
