@@ -64,7 +64,7 @@ const CategoryPage = () => {
       const price = p.price * 100;
       const matchesPrice = price >= priceRange.min && price <= priceRange.max;
       
-      const matchesRating = !selectedRating || p.rating >= selectedRating;
+      const matchesRating = !selectedRating || (p.rating ?? 0) >= selectedRating;
       const matchesAvailability =
         selectedAvailability === "All Items" ||
         (selectedAvailability === "In Stock" && p.stockStatus === "In Stock") ||
@@ -81,7 +81,7 @@ const CategoryPage = () => {
     } else if (sortBy === "Price High to Low") {
       result.sort((a, b) => b.price - a.price);
     } else if (sortBy === "Customer Rating") {
-      result.sort((a, b) => b.rating - a.rating);
+      result.sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
     }
 
     return result;

@@ -64,7 +64,8 @@ const ProductCard = (product: Product) => {
         </div>
         <div
           className={`absolute top-3 right-0 z-10 px-2.5 py-1 text-[11px] font-bold rounded-l-md text-white ${
-            stockStatus === "In Stock" ? "bg-[#00d664]" : "bg-red-500"
+            stockStatus === "In Stock" ? "bg-[#00d664]" : 
+            stockStatus === "Upcoming" ? "bg-blue-500" : "bg-red-500"
           }`}
         >
           {stockStatus}
@@ -90,14 +91,14 @@ const ProductCard = (product: Product) => {
           {/* Hover Overlay Actions */}
           <div className="absolute bottom-3 left-3 right-3 flex gap-2 opacity-0 translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 z-20">
             <button
-              disabled={stockStatus === "Out of Stock"}
+              disabled={stockStatus === "Out of Stock" || stockStatus === "Upcoming"}
               className="flex-1 bg-white text-slate-900 py-2.5 rounded-md text-xs font-bold shadow-md hover:bg-slate-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={(e) => handleOpenModal(e, "buy")}
             >
               Buy Now
             </button>
             <button
-              disabled={stockStatus === "Out of Stock"}
+              disabled={stockStatus === "Out of Stock" || stockStatus === "Upcoming"}
               className="flex-1 bg-[#1a1f2b] text-white py-2.5 rounded-md text-xs font-bold shadow-md hover:bg-slate-800 transition-colors flex items-center justify-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={(e) => handleOpenModal(e, "cart")}
             >

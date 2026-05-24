@@ -5,7 +5,7 @@ export interface Product {
   price: number;
   originalPrice?: number;
   image: string;
-  stockStatus: "In Stock" | "Out of Stock" | "Low Stock";
+  stockStatus: "In Stock" | "Out of Stock" | "Low Stock" | "Upcoming";
   category: string;
   description?: string;
   specifications?: Record<string, string> | any[];
