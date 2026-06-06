@@ -1,79 +1,185 @@
-/* ── IMPORTS must come FIRST ── */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+/* ── IMPORTS ── */
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap");
 @import "tailwindcss";
 
-/* ── CUSTOM DESIGN TOKENS (prefixed with --sl- to avoid Tailwind v4 conflicts) ── */
+/* ══════════════════════════════════════════════════════════════════════
+   SHOPLIXY DESIGN SYSTEM
+   ══════════════════════════════════════════════════════════════════════ */
 :root {
+  /* ── Brand Colors ── */
+  --sl-primary-50: #f5f7ff;
+  --sl-primary-100: #ebf0fe;
+  --sl-primary-200: #ced9fd;
+  --sl-primary-300: #a1b6fb;
+  --sl-primary-400: #6d8af7;
+  --sl-primary-500: #4f6ef4;
+  --sl-primary-600: #4338ca; /* Core Brand */
+  --sl-primary-700: #3730a3;
+  --sl-primary-800: #312e81;
+  --sl-primary-900: #1e1b4b;
+
+  --sl-accent-500: #f43f5e;
+  --sl-accent-600: #e11d48;
+
+  /* ── Semantic Colors ── */
   --sl-bg: #ffffff;
-  --sl-fg: #0f172a;
-  --sl-primary: #6366f1;
-  --sl-primary-dark: #4f46e5;
-  --sl-primary-light: #e0e7ff;
-  --sl-accent: #f43f5e;
-  --sl-accent-light: #ffe4e6;
-  --sl-surface: #f8fafc;
-  --sl-border: #e2e8f0;
-  --sl-muted: #64748b;
+  --sl-bg-subtle: #f8fafc;
+  --sl-text-primary: #0f172a;
+  --sl-text-secondary: #475569;
+  --sl-text-muted: #94a3b8;
+  --sl-border: #f1f5f9;
+  --sl-border-dark: #e2e8f0;
+
+  /* ── Typography ── */
+  --sl-font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui;
+  --sl-font-body: "Inter", ui-sans-serif, system-ui;
+
+  /* ── Spacing / Radii ── */
+  --sl-radius-lg: 1rem;
+  --sl-radius-xl: 1.25rem;
+  --sl-radius-2xl: 1.5rem;
+  --sl-radius-3xl: 2rem;
+
+  /* ── Shadows ── */
+  --sl-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --sl-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --sl-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05);
+  --sl-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.05);
+
+  --animate-duration: 0.5s;
 }
 
-/* ── BASE ── */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+@theme {
+  --color-primary-50: var(--sl-primary-50);
+  --color-primary-100: var(--sl-primary-100);
+  --color-primary-500: var(--sl-primary-500);
+  --color-primary-600: var(--sl-primary-600);
+  --color-accent-500: var(--sl-accent-500);
+  --font-sans: var(--sl-font-sans);
+  --font-body: var(--sl-font-body);
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
+/* ── BASE RESET ── */
 body {
-  background-color: #ffffff;
-  color: #0f172a;
-  font-family: "Inter", ui-sans-serif, system-ui, Arial, Helvetica, sans-serif;
+  background-color: var(--sl-bg);
+  color: var(--sl-text-primary);
+  font-family: var(--sl-font-body);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--sl-font-sans);
+  letter-spacing: -0.02em;
 }
 
 /* ── SCROLLBAR ── */
 ::-webkit-scrollbar {
   width: 6px;
-  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: var(--sl-bg-subtle);
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 99px;
+  background: #e2e8f0;
+  border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #6366f1;
+  background: #cbd5e1;
 }
 
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-/* ── LINE CLAMP ── */
+/* ── LINE CLAMP (Standard) ── */
 .line-clamp-1 {
-  overflow: hidden;
   display: -webkit-box;
-  -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .line-clamp-2 {
-  overflow: hidden;
   display: -webkit-box;
-  -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-/* ── KEYFRAMES ── */
+/* ── UTILITIES ── */
+.sl-label {
+  font-family: var(--sl-font-sans);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sl-text-muted);
+}
+
+.sl-label-primary {
+  color: var(--sl-primary-600);
+}
+
+.sl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-family: var(--sl-font-sans);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.sl-card {
+  background: white;
+  border: 1px solid var(--sl-border);
+  border-radius: var(--sl-radius-2xl);
+  transition: all 0.3s ease;
+}
+
+.sl-card:hover {
+  border-color: var(--sl-border-dark);
+  box-shadow: var(--sl-shadow-xl);
+}
+
+.sl-badge {
+  font-family: var(--sl-font-sans);
+  font-weight: 800;
+  font-size: 0.65rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 99px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sl-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--sl-bg-subtle);
+  border: 1.5px solid var(--sl-border);
+  border-radius: var(--sl-radius-lg);
+  font-family: var(--sl-font-body);
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.sl-input:focus {
+  border-color: var(--sl-primary-400);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(79, 110, 244, 0.1);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -84,129 +190,30 @@ body {
     transform: translateY(0);
   }
 }
-@keyframes fadeInDown {
+@keyframes slideInRight {
   from {
-    opacity: 0;
-    transform: translateY(-12px);
+    transform: translateX(100%);
   }
   to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-@keyframes floatUpDown {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-@keyframes pulseSoft {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.65;
+    transform: translateX(0);
   }
 }
 
-/* ── ANIMATION CLASSES ── */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
 .animate-fade-in-up {
-  animation: fadeInUp 0.45s ease both;
+  animation: fadeInUp 0.5s ease-out forwards;
 }
-.animate-fade-in-down {
-  animation: fadeInDown 0.35s ease both;
-}
-.animate-scale-in {
-  animation: scaleIn 0.35s ease both;
-}
-.animate-float {
-  animation: floatUpDown 3.2s ease-in-out infinite;
-}
-.animate-pulse-soft {
-  animation: pulseSoft 2s ease-in-out infinite;
+.animate-slide-in-right {
+  animation: slideInRight 0.4s ease-out forwards;
 }
 
-/* ── STAGGER DELAYS ── */
-.stagger-children > *:nth-child(1) {
-  animation-delay: 0ms;
+/* Custom Scrollbar for sidebars */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
 }
-.stagger-children > *:nth-child(2) {
-  animation-delay: 60ms;
-}
-.stagger-children > *:nth-child(3) {
-  animation-delay: 120ms;
-}
-.stagger-children > *:nth-child(4) {
-  animation-delay: 180ms;
-}
-.stagger-children > *:nth-child(5) {
-  animation-delay: 240ms;
-}
-.stagger-children > *:nth-child(6) {
-  animation-delay: 300ms;
-}
-.stagger-children > *:nth-child(7) {
-  animation-delay: 360ms;
-}
-
-/* ── GRADIENT TEXT ── */
-.gradient-text {
-  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ── NAV UNDERLINE ── */
-.nav-link {
-  position: relative;
-}
-.nav-link::after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: #6366f1;
-  border-radius: 99px;
-  transition: width 0.25s ease;
-}
-.nav-link:hover::after {
-  width: 100%;
-}
-
-/* ── PRODUCT CARD LIFT ── */
-.product-card {
-  transition:
-    transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 0.28s ease;
-}
-.product-card:hover {
-  transform: translateY(-6px);
-  box-shadow:
-    0 16px 48px rgba(0, 0, 0, 0.1),
-    0 4px 12px rgba(0, 0, 0, 0.06);
-}
-
-/* ── BUTTON PRESS ── */
-.btn-press {
-  transition: transform 0.1s ease;
-}
-.btn-press:active {
-  transform: scale(0.96);
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 10px;
 }

@@ -1,37 +1,22 @@
 import ProductCard from "./ProductCard";
-import { ArrowRight, TrendingUp } from "lucide-react";
-
 import { Product } from "@/types/product";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 interface ProductGridProps {
   title: string;
   subtitle?: string;
   products: Product[];
   showViewAll?: boolean;
+  viewAllHref?: string;
   accent?: "indigo" | "rose" | "emerald" | "orange";
 }
 
-const accentMap = {
-  indigo: {
-    pill: "bg-indigo-50 text-indigo-600 border-indigo-100",
-    bar: "bg-indigo-600",
-    btn: "text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 border-indigo-100",
-  },
-  rose: {
-    pill: "bg-rose-50 text-rose-600 border-rose-100",
-    bar: "bg-rose-500",
-    btn: "text-rose-600 hover:text-rose-800 bg-rose-50 hover:bg-rose-100 border-rose-100",
-  },
-  emerald: {
-    pill: "bg-emerald-50 text-emerald-600 border-emerald-100",
-    bar: "bg-emerald-500",
-    btn: "text-emerald-600 hover:text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border-emerald-100",
-  },
-  orange: {
-    pill: "bg-orange-50 text-orange-600 border-orange-100",
-    bar: "bg-orange-500",
-    btn: "text-orange-600 hover:text-orange-800 bg-orange-50 hover:bg-orange-100 border-orange-100",
-  },
+const accentColors: Record<string, string> = {
+  indigo: "var(--sl-primary-600)",
+  rose: "var(--sl-accent-600)",
+  emerald: "#059669",
+  orange: "#ea580c",
 };
 
 const ProductGrid = ({
@@ -39,23 +24,40 @@ const ProductGrid = ({
   subtitle,
   products,
   showViewAll = true,
+  viewAllHref = "/",
   accent = "indigo",
 }: ProductGridProps) => {
-  const colors = accentMap[accent];
+  const accentColor = accentColors[accent] ?? accentColors.indigo;
 
   return (
-    <section className="py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-10 sm:py-14 md:py-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-left mb-10 md:mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2 md:mb-3 tracking-tight">
-            {title}
-          </h2>
-          {subtitle && <p className="text-slate-500 text-sm md:text-base">{subtitle}</p>}
+        <div className="mb-7 flex items-end justify-between md:mb-10">
+          <div>
+            <div className="mb-1 h-0.5 w-8 rounded-full" style={{ background: accentColor }} />
+            <h2
+              className="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl md:text-3xl"
+              style={{ fontFamily: "var(--sl-font-sans)", letterSpacing: "-0.02em" }}
+            >
+              {title}
+            </h2>
+            {subtitle && <p className="mt-1.5 text-sm text-slate-500">{subtitle}</p>}
+          </div>
+          {showViewAll && (
+            <Link
+              href={viewAllHref}
+              className="group hidden items-center gap-1.5 text-sm font-semibold transition-colors hover:text-indigo-600 sm:flex"
+              style={{ color: accentColor, fontFamily: "var(--sl-font-sans)" }}
+            >
+              View all
+              <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
+            </Link>
+          )}
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5 stagger-children">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 md:gap-4 lg:grid-cols-4 xl:grid-cols-5 stagger-children animate-fade-in-up">
           {products.map((product) => (
             <ProductCard key={product.id} {...product} />
           ))}

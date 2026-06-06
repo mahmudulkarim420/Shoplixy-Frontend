@@ -13,42 +13,61 @@ const Checkout = () => {
   const total = subtotal + shipping;
 
   return (
-    <div className="min-h-screen bg-slate-50/50 py-12">
+    <div className="min-h-screen py-12" style={{ background: "var(--sl-bg-subtle)" }}>
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
           {/* Left Column - Shipping Address */}
           <div className="lg:col-span-7 bg-white border border-slate-100 rounded-2xl p-8 shadow-sm">
-            <h2 className="text-xl font-bold text-slate-900 mb-8 text-center">Shipping Address</h2>
-            
+            <h2
+              className="text-xl font-bold text-slate-900 mb-8"
+              style={{ fontFamily: "var(--sl-font-sans)", letterSpacing: "-0.02em" }}
+            >
+              Shipping Address
+            </h2>
+
             <form className="space-y-6">
               {/* Full Name */}
               <div className="space-y-2">
-                <label className="text-sm font-bold text-slate-700 block">Full Name</label>
+                <label
+                  className="text-sm font-semibold text-slate-700 block"
+                  style={{ fontFamily: "var(--sl-font-sans)" }}
+                >
+                  Full Name
+                </label>
                 <input
                   type="text"
                   placeholder="Enter your full name"
-                  className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-slate-200 focus:border-slate-900 transition-all"
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-100 focus:border-indigo-400 focus:bg-white transition-all"
                 />
               </div>
 
               {/* Phone Number */}
               <div className="space-y-2">
-                <label className="text-sm font-bold text-slate-700 block">Phone number</label>
+                <label
+                  className="text-sm font-semibold text-slate-700 block"
+                  style={{ fontFamily: "var(--sl-font-sans)" }}
+                >
+                  Phone number
+                </label>
                 <input
                   type="text"
                   placeholder="01830-8210"
-                  className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-slate-200 focus:border-slate-900 transition-all"
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-100 focus:border-indigo-400 focus:bg-white transition-all"
                 />
               </div>
 
               {/* Delivery Address */}
               <div className="space-y-2">
-                <label className="text-sm font-bold text-slate-700 block">Delivery Address</label>
+                <label
+                  className="text-sm font-semibold text-slate-700 block"
+                  style={{ fontFamily: "var(--sl-font-sans)" }}
+                >
+                  Delivery Address
+                </label>
                 <textarea
                   placeholder="Enter your exact delivery address here (e.g. House 45, Road 12, Block C...)"
                   rows={4}
-                  className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-slate-200 focus:border-slate-900 transition-all resize-none"
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-100 focus:border-indigo-400 focus:bg-white transition-all resize-none"
                 />
               </div>
 
@@ -62,14 +81,20 @@ const Checkout = () => {
                       onChange={(e) => setBillingSameAsShipping(e.target.checked)}
                       className="peer sr-only"
                     />
-                    <div className="w-6 h-6 border-2 border-slate-200 rounded-lg flex items-center justify-center transition-all duration-300 peer-checked:bg-slate-900 peer-checked:border-slate-900 group-hover:border-slate-400 peer-focus-visible:ring-2 peer-focus-visible:ring-slate-200">
-                      <svg 
-                        viewBox="0 0 24 24" 
-                        fill="none" 
-                        stroke="currentColor" 
-                        strokeWidth="4" 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round" 
+                    <div
+                      className="w-6 h-6 border-2 rounded-lg flex items-center justify-center transition-all duration-300 group-hover:border-slate-400"
+                      style={{
+                        borderColor: billingSameAsShipping ? "var(--sl-primary-600)" : "#e2e8f0",
+                        background: billingSameAsShipping ? "var(--sl-primary-600)" : "#fff",
+                      }}
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         className={`w-3.5 h-3.5 text-white transition-all duration-300 ${billingSameAsShipping ? "opacity-100 scale-100" : "opacity-0 scale-50"}`}
                       >
                         <polyline points="20 6 9 17 4 12" />
@@ -86,7 +111,7 @@ const Checkout = () => {
               {!billingSameAsShipping && (
                 <div className="space-y-6 pt-6 border-t border-slate-100 mt-6 animate-in fade-in slide-in-from-top-4 duration-300">
                   <h3 className="text-lg font-bold text-slate-900">Billing Address</h3>
-                  
+
                   {/* Full Name */}
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-slate-700 block">Full Name</label>
@@ -109,7 +134,9 @@ const Checkout = () => {
 
                   {/* Billing Address */}
                   <div className="space-y-2">
-                    <label className="text-sm font-bold text-slate-700 block">Billing Address</label>
+                    <label className="text-sm font-bold text-slate-700 block">
+                      Billing Address
+                    </label>
                     <textarea
                       placeholder="Enter your exact billing address here"
                       rows={4}
@@ -122,7 +149,14 @@ const Checkout = () => {
               {/* Confirm Order Button */}
               <button
                 type="button"
-                className="w-full bg-slate-900 text-white py-4 rounded-xl font-bold text-[15px] hover:bg-slate-800 transition-all duration-300 shadow-lg shadow-slate-200 active:scale-[0.98] mt-4"
+                className="w-full py-4 rounded-xl font-semibold text-white text-base transition-all duration-200 active:scale-[0.98] mt-4 shadow-md"
+                style={{ background: "var(--sl-primary-600)", fontFamily: "var(--sl-font-sans)" }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.background = "var(--sl-primary-700)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLButtonElement).style.background = "var(--sl-primary-600)";
+                }}
               >
                 Confirm Order
               </button>
@@ -131,7 +165,12 @@ const Checkout = () => {
 
           {/* Right Column - Your Order */}
           <div className="lg:col-span-5 bg-white border border-slate-100 rounded-2xl p-8 shadow-sm space-y-8">
-            <h2 className="text-xl font-bold text-slate-900 text-center">Your order</h2>
+            <h2
+              className="text-xl font-bold text-slate-900"
+              style={{ fontFamily: "var(--sl-font-sans)", letterSpacing: "-0.02em" }}
+            >
+              Your Order
+            </h2>
 
             {/* Order Item */}
             <div className="p-5 border border-slate-100 rounded-2xl flex items-center gap-4 relative">
@@ -175,7 +214,7 @@ const Checkout = () => {
                     <Plus size={14} />
                   </button>
                 </div>
-                
+
                 <div className="flex items-center gap-1.5">
                   <span className="text-[10px] text-slate-400 font-bold uppercase">BDT</span>
                   <span className="text-sm font-black text-slate-900">
@@ -190,7 +229,9 @@ const Checkout = () => {
 
             {/* Discount Code */}
             <div>
-              <h3 className="text-sm font-bold text-slate-900 mb-4 uppercase tracking-wider">Discount Code</h3>
+              <h3 className="text-sm font-bold text-slate-900 mb-4 uppercase tracking-wider">
+                Discount Code
+              </h3>
               <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <CheckCircle2 size={18} className="text-emerald-500" />
@@ -213,7 +254,9 @@ const Checkout = () => {
             {/* Summary */}
             <div className="space-y-4 pt-4 border-t border-slate-100">
               <div className="flex justify-between items-center text-slate-500">
-                <span className="text-sm font-medium uppercase tracking-widest text-[10px]">Subtotal</span>
+                <span className="text-sm font-medium uppercase tracking-widest text-[10px]">
+                  Subtotal
+                </span>
                 <div className="flex items-center gap-1.5">
                   <span className="text-[10px] font-bold tracking-tight">BDT</span>
                   <span className="text-sm font-bold text-slate-900">
@@ -222,7 +265,9 @@ const Checkout = () => {
                 </div>
               </div>
               <div className="flex justify-between items-center text-slate-500">
-                <span className="text-sm font-medium uppercase tracking-widest text-[10px]">Shipping Cost</span>
+                <span className="text-sm font-medium uppercase tracking-widest text-[10px]">
+                  Shipping Cost
+                </span>
                 <div className="flex items-center gap-1.5">
                   <span className="text-[10px] font-bold tracking-tight">BDT</span>
                   <span className="text-sm font-bold text-slate-900">{shipping}</span>
@@ -232,7 +277,9 @@ const Checkout = () => {
               <div className="h-px bg-slate-100 my-2" />
 
               <div className="flex justify-between items-center">
-                <span className="text-lg font-black text-slate-900 uppercase tracking-tighter">Total</span>
+                <span className="text-lg font-black text-slate-900 uppercase tracking-tighter">
+                  Total
+                </span>
                 <div className="flex items-center gap-1.5">
                   <span className="text-[11px] font-black tracking-tighter text-slate-400">
                     BDT
@@ -246,7 +293,9 @@ const Checkout = () => {
 
             {/* Payment Method */}
             <div className="space-y-4">
-              <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Payment method</h3>
+              <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
+                Payment method
+              </h3>
               <div className="bg-slate-50 border border-slate-100 rounded-2xl p-6 flex items-center justify-between">
                 <label className="flex items-center gap-4 cursor-pointer group">
                   <div className="relative flex items-center justify-center">
